@@ -9,19 +9,27 @@
     data(){
       return{
         access_token: 'pk.eyJ1IjoibWFya2Rhd3NvbjEiLCJhIjoiY2wzNzFvOTQwMXRoMjNpcDlld2FhZTNxcSJ9.gCW5I0cLw2Xq_-EKawtcmA',
-        map: {}
+        map: {},
+        data: [
+          {'Name': 'Gurnards Head',
+          'location':{'lat': 50.1824941038516, 'lon': -5.593098873330255},
+          'description':'Little stall opposite pub updated on a weekly basis',
+          'owned_by': 'Some Lady',
+          'items': ['eggs','jam']
+          },
+          {'Name': 'Gulval School',
+          'location':{'lat': 50.132258294437996,'lon': -5.527442420889749},
+          'description':'Food grown by Gulval School',
+          'owned_by': 'Gulval Primary',
+          'items': ['corgettes','runner beans']
+          }
+        ]
       }
     },
     mounted(){
       this.createMap()
-      // yourMarkersArray.map((marker) => {
-      // const LngLat = [marker.location.lng, marker.location.lat]
-      // const popup = marker.description
-      // new mapboxgl.Marker()
-      //     .setLngLat(LngLat)
-      //     .setPopup(popup)
-      //     .addTo(map) // Initialized above
-      // })
+      this.addControl()
+      this.addMarkers()
     },
     methods:{
       createMap(){
@@ -31,8 +39,22 @@
           style: 'mapbox://styles/mapbox/streets-v11',
           zoom: 10,
           center: [-5.5376, 50.1188]
-        }),
+        })
+      },
+      addControl(){
         this.map.addControl(new mapboxgl.NavigationControl())
+      },
+      addMarkers(){
+        this.data.map((marker) => {
+          console.log(marker.location.lon)
+          const LngLat = [marker.location.lon, marker.location.lat]
+          const popup = new mapboxgl.Popup({ offset: 25 }).setText(marker.description);
+          console.log(LngLat)
+          new mapboxgl.Marker()
+              .setLngLat(LngLat)
+              .setPopup(popup)
+              .addTo(this.map) // Initialized above
+        })
       }
     }
 
