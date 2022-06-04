@@ -33,9 +33,39 @@ export default {
     '@nuxtjs/tailwindcss',
   ],
 
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  plugins: [
+    {
+      src: '@/plugins/localProd'
+    }
+  ],
+
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
+
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  buildModules: [
+    // https://go.nuxtjs.dev/tailwindcss
+    '@nuxtjs/tailwindcss',
+    [
+      '@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }
+    ],
+    '@nuxtjs/moment'
+  ],
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
+
+  env: {
+    VUE_APP_LOCALPROD_API_VERSION: process.env.VUE_APP_LOCALPROD_API_VERSION,
+    VUE_APP_LOCALPROD_API_BASE_URL: process.env.VUE_APP_LOCALPROD_API_BASE_URL,
+  },
+
+  axios: {
+    baseURL: `${process.env.VUE_APP_LOCALPROD_API_BASE_URL}/v${process.env.VUE_APP_LOCALPROD_API_VERSION}`
+  },
+
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

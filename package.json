@@ -9,7 +9,11 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/moment": "^1.6.1",
+    "axios": "^0.27.2",
     "core-js": "^3.19.3",
+    "dotenv": "^16.0.1",
     "mapbox-gl": "^2.8.2",
     "mapbox-gl-vue": "^2.0.4",
     "nuxt": "^2.15.8",

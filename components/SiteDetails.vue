@@ -1,20 +1,21 @@
 <template>
-     <div class=" p-4 mx-16 space-y-4">
+    <div class=" p-4 mx-16 space-y-4">
         <span class="block border-b-2">
             <h1 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800 font-semibold whitespace-nowrap dark:text-white">Site</h1>
-            Gurnards Head
+            Cant get when serialized this way
+            {{activeSite}}
         </span>
         <span class="block border-b-2">
             <h1 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800 font-semibold whitespace-nowrap dark:text-white">Items</h1>
             <ul>
-                <li>Apple and Walnut Chutney</li>
-                <li>Raspbery and White Chocolate Flapjack</li>
-                <li>Chocolate Tiffin</li>
+                <li>xxxxxxxxxxxxx</li>
+                <li>xxxxxxxxxxxxx</li>
+                <li>Cant get when serialized this way</li>
             </ul>  
         </span>
         <span class="block border-b-2">
             <h1 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800 font-semibold whitespace-nowrap dark:text-white">Description</h1>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              {{message}}
         </span>
         <span class="block border-b-2">
             <h1 class="text-3xl font-normal leading-normal mt-0 mb-2 text-zinc-800 font-semibold whitespace-nowrap dark:text-white">Images</h1>
@@ -49,12 +50,34 @@
                     </div>
                 </div>
         </span>
+        {{posts}}
     </div> 
 </template>
 
 <script>
 export default {
-
+  props : {
+    posts:Array
+  },
+  data: () => ({
+    message:null
+  }),
+  created () {
+    this.fetchPosts()
+    this.message = this.posts[0].message
+  },
+  computed: {
+  activeSite() {
+        return this.$store.state.activeSite
+    }
+  },
+  methods: {
+    fetchPosts() {
+      this.$localProdAPI.post.fetchPosts().then((response) => {
+      this.posts = response.data
+    })
+    }
+  }
 }
 </script>
 
