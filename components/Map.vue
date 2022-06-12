@@ -50,11 +50,7 @@
         this.map.addControl(new mapboxgl.NavigationControl())
       },
       addMarkers(){
-        console.log('------ThisisaMarker----')
-        console.log(this.sites)
-        console.log('------ThisisaMarker----')
         this.sites.map((marker) => {
-          console.log(marker)
           const LngLat = [marker.lon, marker.lat]
           const popup = new mapboxgl.Popup({ offset: 25 }).setText(marker.description);
           const markerHandle = new mapboxgl.Marker({color: "#3fb1ce"})
@@ -62,7 +58,7 @@
               .setPopup(popup)
               .addTo(this.map) // Initialized above
           markerHandle.getElement().addEventListener('click', () => {
-            this.$store.dispatch('setActiveSite',marker.name)
+            this.$store.dispatch('setActiveSite',marker.id)
             })
         })
       }

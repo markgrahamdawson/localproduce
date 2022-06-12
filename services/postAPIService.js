@@ -31,8 +31,8 @@ class PostServiceAPI extends EventEmitter {
         axiosAuthModified.defaults.headers.common.Authorization = `${token}`
       }
       axiosAuthModified.defaults.cancelToken = this.cancelToken.token
-      if (payload.slug) {
-        const url = `/site/${payload.slug}/`
+      if (payload.id) {
+        const url = `/site_extended/${payload.id}/`
         return new Promise(resolve => {
           axiosAuthModified.get(url).then(response => {
             resolve(response);

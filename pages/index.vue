@@ -7,9 +7,7 @@
         />
       </div>
       <div class="w-1/2">
-        <SiteDetails
-          :posts="posts"  v-if="posts"
-        />
+        <SiteDetails/>
       </div>
     </div>
   </div> 
@@ -31,11 +29,16 @@
     },
     data: () => ({
       sites:null,
-      posts:null
+      // sitePost:null
     }),
+    computed: {
+      activeSite() {
+        return this.$store.state.activeSite
+      }
+    },
     created () {
-      this.fetchSites(),
-      this.fetchPosts()
+      this.fetchSites()
+      // this.fetchSite()
     },
     methods: {
       fetchSites() {
@@ -43,11 +46,11 @@
         this.sites = response.data
       })
       },
-      fetchPosts() {
-        this.$localProdAPI.post.fetchPosts().then((response) => {
-        this.posts = response.data
-      })
-      }
+      // fetchSite() {
+      //   this.$localProdAPI.post.fetchSite({id:this.activeSite}).then((response) => {
+      //   this.sitePost = response.data
+      // })
+      // }
     }
   }
 </script>

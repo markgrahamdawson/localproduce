@@ -3,16 +3,16 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      activeSite: 100000
+      activeSite: 1
     },
     mutations: {
-      setActiveSite(state, siteName) {
-        state.activeSite = siteName
+      setActiveSite(state, siteId) {
+        state.activeSite = siteId
       }
     },
     actions: {
-      setActiveSite(vuexContext, siteName) {
-        vuexContext.commit('setActiveSite',siteName)
+      setActiveSite(vuexContext, siteId) {
+        vuexContext.commit('setActiveSite',siteId)
       }
     }
   })
